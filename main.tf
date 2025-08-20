@@ -5,4 +5,8 @@ resource "incus_image" "image" {
   }
   project = var.incus_project
   aliases = [data.external.image.result.fingerprint]
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
