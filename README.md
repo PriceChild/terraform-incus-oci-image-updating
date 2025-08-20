@@ -26,7 +26,7 @@ with:
 
 ```
 module "go-vod_image" {
-  source = "github.com/PriceChild/terraform-incus-docker-image-updating?ref=0.0.1"
+  source = "github.com/PriceChild/terraform-incus-docker-image-updating?ref=0.0.2"
   docker_image = "radialapps/go-vod"
 }
 
