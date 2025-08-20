@@ -7,16 +7,28 @@ set -e
 # FOO and BAZ shell variables.
 # jq will ensure that the values are properly quoted
 # and escaped for consumption by the shell.
-eval "$(jq -r '@sh "DOCKER_SOURCE_IMAGE=\(.docker_image) TAG=\(.tag)"')"
+eval "$(jq -r '@sh "DOCKER_SOURCE_IMAGE=\(.docker_image)"')"
 
-DOCKER_NAMESPACE=${DOCKER_SOURCE_IMAGE%/*}
-DOCKER_IMAGE=${DOCKER_SOURCE_IMAGE#*/}
-
-if [ "${TAG}" == "null" ]
+if [[ $DOCKER_SOURCE_IMAGE == *":"* ]]
 then
-    TAG=latest
+    DOCKER_TAG=${DOCKER_SOURCE_IMAGE#*:}
+    DOCKER_IMAGE=${DOCKER_SOURCE_IMAGE%:*}
+else
+    DOCKER_TAG="latest"
+    DOCKER_IMAGE=${DOCKER_SOURCE_IMAGE}
 fi
 
-FULL_DIGEST=$(curl https://hub.docker.com/v2/namespaces/$DOCKER_NAMESPACE/repositories/$DOCKER_IMAGE/tags/$TAG 2>/dev/null | jq '.digest' -r | cut -d\: -f 2)
+if [[ $DOCKER_IMAGE == *"/"* ]]
+then
+    DOCKER_NAMESPACE=${DOCKER_IMAGE%/*}
+    DOCKER_IMAGE=${DOCKER_IMAGE#*/}
+else
+    DOCKER_NAMESPACE="_"
+fi
 
-jq -n --arg fingerprint "$FULL_DIGEST" --arg short_digest "${FULL_DIGEST:0:12}" '{"fingerprint":$fingerprint, "short_digest":$short_digest}'
+FULL_DIGEST=$(curl https://hub.docker.com/v2/namespaces/$DOCKER_NAMESPACE/repositories/$DOCKER_IMAGE/tags/$DOCKER_TAG 2>/dev/null | jq '.digest' -r | cut -d\: -f 2)
+
+jq -n \
+    --arg fingerprint "$FULL_DIGEST" \
+    --arg short_digest "${FULL_DIGEST:0:12}" \
+    '{"fingerprint":$fingerprint, "short_digest":$short_digest}'
