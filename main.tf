@@ -4,7 +4,9 @@ resource "incus_image" "image" {
     name = data.external.image.query.docker_image
   }
   project = var.incus_project
-  aliases = [data.external.image.result.fingerprint]
+  alias {
+    name = data.external.image.result.fingerprint
+  }
 
   lifecycle {
     create_before_destroy = true
