@@ -31,4 +31,5 @@ FULL_DIGEST=$(curl https://hub.docker.com/v2/namespaces/$DOCKER_NAMESPACE/reposi
 jq -n \
     --arg fingerprint "$FULL_DIGEST" \
     --arg short_digest "${FULL_DIGEST:0:12}" \
-    '{"fingerprint":$fingerprint, "short_digest":$short_digest}'
+    --arg docker_image "$DOCKER_NAMESPACE/$DOCKER_IMAGE@sha256:$FULL_DIGEST" \
+    '{"fingerprint":$fingerprint, "short_digest":$short_digest, "docker_image":$docker_image}'

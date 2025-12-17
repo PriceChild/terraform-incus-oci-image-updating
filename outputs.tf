@@ -1,7 +1,6 @@
 output "fingerprint" {
-  value = data.external.image.result.fingerprint
-  depends_on = [
-    # Don't use the image until it's been created:
-    resource.incus_image.image
-  ]
+  value = resource.incus_image.image.fingerprint
+}
+output "docker_image" {
+  value = data.external.image.result.docker_image
 }
