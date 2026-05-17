@@ -68,7 +68,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_docker_image"></a> [docker\_image](#input\_docker\_image) | The docker image to get information for | `string` | n/a | yes |
-| <a name="input_docker_remote"></a> [docker\_remote](#input\_docker\_remote) | Incus remote OCI registry name | `string` | `"docker"` | no |
+| <a name="input_docker_remote"></a> [docker\_remote](#input\_docker\_remote) | Incus remote OCI registry name | `string` | `"docker.io"` | no |
 | <a name="input_incus_project"></a> [incus\_project](#input\_incus\_project) | Incus project name | `string` | `"default"` | no |
 
 ## Outputs

@@ -5,7 +5,7 @@ variable "docker_image" {
 
 variable "docker_remote" {
   type      = string
-  default   = "docker"
+  default   = "docker.io"
   description = "Incus remote OCI registry name"
 }
 
