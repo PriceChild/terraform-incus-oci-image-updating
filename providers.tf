@@ -3,5 +3,8 @@ terraform {
     incus = {
       source = "lxc/incus"
     }
+    docker = {
+      source  = "kreuzwerker/docker"
+    }
   }
 }
