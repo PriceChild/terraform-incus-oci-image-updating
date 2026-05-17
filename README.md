@@ -40,6 +40,7 @@ resource "incus_instance" "go-vod" {
 ```
 
 ---
+
 ## Requirements
 
 No requirements.
@@ -66,13 +67,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
-| <a name="input_docker_image"></a> [docker\_image](#input\_docker\_image) | n/a | `string` | n/a | yes |
-| <a name="input_docker_remote"></a> [docker\_remote](#input\_docker\_remote) | n/a | `string` | `"docker"` | no |
-| <a name="input_incus_project"></a> [incus\_project](#input\_incus\_project) | n/a | `string` | `"default"` | no |
+| <a name="input_docker_image"></a> [docker\_image](#input\_docker\_image) | The docker image to get information for | `string` | n/a | yes |
+| <a name="input_docker_remote"></a> [docker\_remote](#input\_docker\_remote) | Incus remote OCI registry name | `string` | `"docker"` | no |
+| <a name="input_incus_project"></a> [incus\_project](#input\_incus\_project) | Incus project name | `string` | `"default"` | no |
 
 ## Outputs
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_docker_image"></a> [docker\_image](#output\_docker\_image) | n/a |
-| <a name="output_fingerprint"></a> [fingerprint](#output\_fingerprint) | n/a |
+| <a name="output_docker_image"></a> [docker\_image](#output\_docker\_image) | Docker image reference with digest |
+| <a name="output_fingerprint"></a> [fingerprint](#output\_fingerprint) | SHA256 digest of the provided docker image |
